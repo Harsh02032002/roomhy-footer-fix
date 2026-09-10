@@ -1,0 +1,11 @@
+{
+  "source": "https://github.com/Harsh02032002/roomhy-blog-faqs.git",
+  "capabilities": [
+    {"capability":"homepage code and routes","source":"GitHub repository","outcome":"preserve","status":"implementing","next_action":"verify homepage"},
+    {"capability":"homepage image assets","source":"linked Roomhy asset storage","outcome":"restore into current project","status":"implementing","next_action":"verify every image request"},
+    {"capability":"footer","source":"attached screenshot","outcome":"rebuild","status":"implementing","next_action":"verify desktop and mobile"},
+    {"capability":"database records","source":"none detected","outcome":"not applicable","status":"verified","next_action":"none"},
+    {"capability":"authentication and authorization","source":"none detected","outcome":"not applicable","status":"verified","next_action":"none"},
+    {"capability":"external providers, payments, email, webhooks, schedules","source":"none detected","outcome":"not applicable","status":"verified","next_action":"none"}
+  ]
+}
