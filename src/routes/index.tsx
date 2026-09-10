@@ -7,6 +7,7 @@ import {
   BadgeCheck,
   BedDouble,
   Building2,
+  Building,
   CalendarDays,
   CalendarCheck2,
   Check,
@@ -18,9 +19,13 @@ import {
   House,
   Armchair,
   FileText,
+  Facebook,
   IndianRupee,
   LockKeyhole,
   MapPin,
+  Instagram,
+  Linkedin,
+  Mail,
   Menu,
   MessageCircleMore,
   Phone,
@@ -34,6 +39,7 @@ import {
   UserRound,
   WalletCards,
   X,
+  Youtube,
   Zap,
 } from "lucide-react";
 
@@ -162,7 +168,19 @@ const faqs = [
   { question: "Is Roomhy safe for girls?", answer: "Roomhy offers verified women-only and secure accommodation options with clear amenity and safety information to help you choose confidently.", icon: Users, tone: "gold" },
 ];
 
-const popularSearches = ["PG in Kota", "PG in Jaipur", "PG in Delhi", "Hostels in Kota", "Hostels in Jaipur", "Hostels in Delhi", "Co-living in Bangalore", "Co-living in Pune"];
+const popularSearches = ["PG in Kota", "PG in Jaipur", "PG in Delhi", "Hostels in Kota", "Hostels in Jaipur", "Hostels in Delhi", "Co-living in Bangalore", "Co-living in Pune", "Student Apartments", "Girls Hostel", "Boys Hostel", "Luxury PG", "Budget PG"];
+
+const footerGroups = [
+  { title: "POPULAR CITIES", icon: MapPin, links: ["PG in Kota", "PG in Jaipur", "PG in Delhi", "PG in Indore", "PG in Bangalore", "PG in Pune"], more: "View all cities" },
+  { title: "PROPERTY TYPES", icon: Building2, links: ["PG for Boys", "PG for Girls", "Co-ed PG", "Hostels", "Boys Hostels", "Girls Hostels", "Co-living", "Apartments"], more: "View all properties" },
+];
+
+const footerTrust = [
+  { title: "Smart Bidding", subtitle: "Best price deals", icon: ShieldCheck },
+  { title: "Verified Listings", subtitle: "100% verified properties", icon: BadgeCheck },
+  { title: "50,000+ Students", subtitle: "Trust us to find a home", icon: Users },
+  { title: "10+ Cities", subtitle: "Across India", icon: Building },
+];
 
 function Brand() {
   return <a className="brand" href="#top" aria-label="ROOMHY home">ROOMHY<span>.com</span></a>;
@@ -470,17 +488,52 @@ function FrequentlyAskedQuestions() {
           </div>
         ))}
       </div>
-      <div className="popular-searches">
-        <span className="popular-icon"><Search /></span>
-        <div className="popular-copy"><strong>Popular Searches</strong><small>Quick links to find what you're looking for.</small></div>
-        <div className="search-chips" aria-label="Popular accommodation searches">
+    </section>
+  );
+}
+
+function PopularSearchesFooter() {
+  return (
+    <section className="footer-top" aria-labelledby="popular-search-title">
+      <LeafSpray className="footer-leaves footer-leaves-right" />
+      <div className="footer-search-card">
+        <div className="footer-search-intro">
+          <span className="footer-search-icon"><Search /></span>
+          <div><p className="section-eyebrow">Explore More</p><h2 id="popular-search-title">Popular Searches</h2><span>Quick links to find what you're looking for.</span></div>
+        </div>
+        <div className="footer-search-chips" aria-label="Popular accommodation searches">
           {popularSearches.map((search) => <a href="#top" key={search}>{search}</a>)}
         </div>
+        <div className="footer-search-aside"><p>Find<br />Explore<br />Move In<br />Belong ♡</p><a href="#top">View all searches <ArrowRight /></a></div>
+      </div>
+      <div className="footer-trust-strip">
+        {footerTrust.map(({ title, subtitle, icon: Icon }) => <div className="footer-trust-item" key={title}><span><Icon /></span><div><strong>{title}</strong><small>{subtitle}</small></div></div>)}
       </div>
     </section>
   );
 }
 
+function FooterColumn({ title, icon: Icon, links, more }: { title: string; icon: typeof MapPin; links: string[]; more?: string }) {
+  return <div className="footer-column"><h3><Icon />{title}</h3><ul>{links.map((link) => <li key={link}><a href="#top"><span>›</span>{link}</a></li>)}</ul>{more && <a className="footer-more" href="#top">{more} <ArrowRight /></a>}</div>;
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <LeafSpray className="footer-leaves footer-leaves-left" />
+      <p className="footer-note">Students<br />Build<br />Better<br />Tomorrows ♡</p>
+      <div className="footer-grid">
+        <div className="footer-brand-column"><Brand /><p>India's smart bidding platform for<br />PGs, Hostels, Co-living Spaces &amp;<br />Student Apartments.</p><ul><li><ShieldCheck />Smart Bidding</li><li><BadgeCheck />Verified Properties</li><li><BedDouble />50,000+ Beds</li><li><Star />Trusted by Students</li></ul><div className="footer-social"><strong>FOLLOW US ON</strong><div><a aria-label="Facebook" href="#top"><Facebook /></a><a aria-label="Instagram" href="#top"><Instagram /></a><a aria-label="LinkedIn" href="#top"><Linkedin /></a><a aria-label="YouTube" href="#top"><Youtube /></a></div></div></div>
+        {footerGroups.map((group) => <FooterColumn key={group.title} {...group} />)}
+        <div className="footer-column footer-split"><h3><BedDouble />HOSTELS</h3><ul>{["Hostels for Boys", "Hostels for Girls", "Co-ed Hostels"].map((link) => <li key={link}><a href="#top"><span>›</span>{link}</a></li>)}</ul><h3><Building2 />CO-LIVING</h3><ul>{["Co-living for Boys", "Co-living for Girls", "Co-ed Co-living"].map((link) => <li key={link}><a href="#top"><span>›</span>{link}</a></li>)}</ul></div>
+        <FooterColumn title="QUICK LINKS" icon={ArrowRight} links={["List Your Property", "Owner Dashboard", "Tenant Dashboard / My Stays", "About Us", "Contact Us", "FAQ", "Login / Register"]} />
+        <FooterColumn title="POLICIES & LEGAL" icon={FileText} links={["Privacy Policy", "Terms & Conditions", "Refund Policy", "Cancellation Policy", "Refund Request"]} />
+      </div>
+      <div className="footer-bottom"><div className="footer-legal-row"><span>© 2026 Roomhy Technology Pvt. Ltd. All rights reserved.</span><span>Made with <Heart fill="currentColor" /> In India</span><span><a href="mailto:team@roomhy.com"><Mail />team@roomhy.com</a><a href="tel:+918764425020"><Phone />+91 8764425020</a></span></div><div className="footer-address-row"><span><MapPin />ROOMHY TECHNOLOGY — 847, Balaji Nagar, Rangbari, Near Pani Ki Tanki, Kota, Rajasthan 324005, India</span><span><FileText />GSTIN: 08SLWPS2629G1ZZ</span></div></div>
+    </footer>
+  );
+}
+
 function Index() {
-  return <main><Header /><Hero /><Offers /><BrowseCities /><WhyChoose /><Trending /><SmartSavings /><StudentsSay /><LatestBlog /><FrequentlyAskedQuestions /></main>;
+  return <main><Header /><Hero /><Offers /><BrowseCities /><WhyChoose /><Trending /><SmartSavings /><StudentsSay /><LatestBlog /><FrequentlyAskedQuestions /><PopularSearchesFooter /><Footer /></main>;
 }
